@@ -3,39 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jingshi.io - Personal Growth Journey</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Jingshi.io | Prototype Lab & Reflections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --color-primary: #000000;
+            --color-secondary: #333333;
+            --color-accent: #000000;
+            --color-light: #f9f9f9;
+            --color-text: #111111;
+            --color-text-light: #555555;
+            --font-main: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: white;
+            letter-spacing: -0.01em;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--color-accent);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--color-primary);
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-primary);
+        }
+        
+        .logo span {
+            color: var(--color-accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 2rem;
+        }
+        
+        nav a {
+            color: var(--color-text);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-accent);
+            transition: var(--transition);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            background-color: var(--color-light);
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .hero-content h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--color-text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-accent);
+            color: white;
+            border-radius: 0;
+            font-weight: 500;
+            transition: var(--transition);
+            letter-spacing: 0.05em;
+        }
+        
+        .btn:hover {
+            background-color: var(--color-secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Featured Section */
+        .featured {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: var(--color-text-light);
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .featured-item {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid #eee;
+            position: relative;
+        }
+        
+        .featured-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--color-accent);
+        }
+        
+        .featured-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--color-accent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .featured-item:hover::before {
+            opacity: 1;
+        }
+        
+        .featured-content {
+            padding: 1.5rem;
+        }
+        
+        .featured-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(0, 0, 0, 0.07);
+            color: var(--color-accent);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .featured-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .featured-desc {
+            color: var(--color-text-light);
+            margin-bottom: 1rem;
+        }
+        
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background-color: var(--color-light);
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links a {
+            margin: 0 1rem;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+        
+        footer p {
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-image {
+                order: 1;
+            }
+            
+            .hero-content {
+                order: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Jingshi.io</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/musings">Musings</a></li>
-                <li><a href="/projects">Projects</a></li>
-                <li><a href="/podcasts">Podcasts</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </nav>
+        <div class="container header-inner">
+            <a href="#" class="logo">jingshi<span>.io</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Notes</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     
-    <main>
-        <section class="hero">
-            <h2>Welcome to My Personal Growth Journey</h2>
-            <p>Exploring the harmony between cognition and practice</p>
-        </section>
-        
-        <section class="featured">
-            <h3>Featured Content</h3>
-            <!-- Featured content will go here -->
-        </section>
-    </main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-image">
+                    <img src="/api/placeholder/600/600" alt="Jingshi portrait" />
+                </div>
+                <div class="hero-content">
+                    <h1>Hello, I'm Jingshi</h1>
+                    <p>I build and reflect at the intersection of thought and action. My philosophy is centered on iterative creation—learning through making, thinking through building, and growing through reflection.</p>
+                    <p>This is my digital workshop where I share prototypes, notes, and explorations as they evolve.</p>
+                    <a href="#" class="btn">Explore My Work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="featured">
+        <div class="container">
+            <div class="section-title">
+                <h2>Workshop Highlights</h2>
+                <p>Recent projects and reflections from the lab</p>
+            </div>
+            
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <div class="featured-content">
+                        <span class="featured-category">Reflection</span>
+                        <h3 class="featured-title">Learning by Making: My Prototyping Philosophy</h3>
+                        <p class="featured-desc">Thoughts on how building imperfect prototypes accelerates understanding more than perfect planning.</p>
+                        <div class="featured-meta">
+                            March 15, 2025
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="featured-item">
+                    <div class="featured-content">
+                        <span class="featured-category">Prototype</span>
+                        <h3 class="featured-title">Interactive Data Explorer</h3>
+                        <p class="featured-desc">A weekend project exploring how different visualization techniques can reveal patterns in complex datasets.</p>
+                        <div class="featured-meta">
+                            February 28, 2025
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="featured-item">
+                    <div class="featured-content">
+                        <span class="featured-category">Lab Notes</span>
+                        <h3 class="featured-title">Conversation with a Fellow Builder</h3>
+                        <p class="featured-desc">Recorded discussion on the iterative process of turning abstract ideas into working prototypes.</p>
+                        <div class="featured-meta">
+                            January 22, 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <footer>
-        <p>&copy; 2025 Jingshi.io</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#">GitHub</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Email</a>
+                </div>
+                <p>&copy; 2025 jingshi.io. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-    
-    <script src="js/main.js"></script>
 </body>
 </html>
